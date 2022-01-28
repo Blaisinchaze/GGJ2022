@@ -40,7 +40,6 @@ public class Enemy : Device
                 break;
 
             case PowerState.POWERED:
-                Debug.Log("Beep");
                 UpdatePathing(player.position);
                 agent.speed = moveSpeed;
                 break;
@@ -60,7 +59,6 @@ public class Enemy : Device
 
     override internal void StateUpdate()
     {
-        Debug.Log("state update");
         switch (stateStack.Peek())
         {
             case PowerState.DRAINED:
@@ -69,7 +67,7 @@ public class Enemy : Device
                 break;
 
             case PowerState.CHARGING:
-                if (currentEnergy == maxEnergy)
+                if (currentEnergy >= maxEnergy)
                 {
                     stateStack.Clear();
                     stateStack.Push(PowerState.POWERED);
@@ -78,7 +76,7 @@ public class Enemy : Device
                 break;
 
             case PowerState.POWERED:
-                if (currentEnergy == 0)
+                if (currentEnergy <= 0)
                 {
                     stateStack.Push(PowerState.CHARGING);
                 }
@@ -87,6 +85,8 @@ public class Enemy : Device
             default:
                 break;
         }
+
+        Debug.Log("State = " + stateStack.Peek());
         
     }
 

@@ -16,6 +16,7 @@ public class Device : MonoBehaviour
     public float minActiveEnergy;
     public float energyLossPerSecond;
     [Space]
+    [SerializeField]
     internal float currentEnergy;
     internal Stack<PowerState> stateStack = new Stack<PowerState>();
 

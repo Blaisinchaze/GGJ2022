@@ -461,10 +461,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxEnergy: 100
   minActiveEnergy: 0
-  energyLossPerSecond: 0
+  energyLossPerSecond: 10
   chargeRatePerSecond: 25
   minDistanceFromPlayer: 0
-  moveSpeed: 5
+  moveSpeed: 1
   overchargeDuration: 0
 --- !u!54 &1504333955
 Rigidbody:
