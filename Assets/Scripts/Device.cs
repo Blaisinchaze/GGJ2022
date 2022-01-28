@@ -9,7 +9,7 @@ public enum PowerState
     POWERED
 }
 
-public abstract class Device : MonoBehaviour
+public class Device : MonoBehaviour
 {
     [Header("Device Settings")]
     public float maxEnergy;
@@ -17,17 +17,17 @@ public abstract class Device : MonoBehaviour
     public float energyLossPerSecond;
     [Space]
     internal float currentEnergy;
-    internal Stack<PowerState> stateStack;
+    internal Stack<PowerState> stateStack = new Stack<PowerState>();
 
-    // Start is called before the first frame update
-    void Start()
+    // For any device Start make sure you call base.Start() and your start function is an override
+    internal virtual void Start()
     {
         currentEnergy = maxEnergy;
         stateStack.Push(PowerState.POWERED);
     }
 
-    // Update is called once per frame
-    void Update()
+    // For any device update make sure you call base.Update() and your update function is an override
+    internal virtual void Update()
     {
         StateUpdate();
         SpendEnergy(energyLossPerSecond * Time.deltaTime);
@@ -66,5 +66,11 @@ public abstract class Device : MonoBehaviour
         return retVal;
     }
 
-    abstract internal void StateUpdate();
+    internal virtual void StateUpdate()
+    {
+        if (stateStack.Count == 0)
+        {
+            stateStack.Push(PowerState.CHARGING);
+        }
+    }
 }

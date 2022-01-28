@@ -10,43 +10,57 @@ public class Enemy : Device
     public float chargeRatePerSecond;
     public float minDistanceFromPlayer;
     public float moveSpeed;
+    public float overchargeDuration;
 
     NavMeshAgent agent;
     Transform player;
-    bool shielded;
+    float overchargeTimer = 0;
     Rigidbody rb;
 
     // Start is called before the first frame update
-    void Start()
+    override internal void Start()
     {
-        shielded = false;
+        base.Start();
+        overchargeTimer = 0;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
     }
 
     // Update is called once per frame
-    void Update()
+    override internal void Update()
     {
+        base.Update();
         switch (stateStack.Peek())
         {
-            case PowerState.DRAINED:
             case PowerState.CHARGING:
                 currentEnergy += chargeRatePerSecond * Time.deltaTime;
                 agent.speed = 0;
                 break;
+
             case PowerState.POWERED:
                 Debug.Log("Beep");
                 UpdatePathing(player.position);
                 agent.speed = moveSpeed;
                 break;
+
             default:
                 break;
         }
+
+        if (overchargeTimer > 0)
+        {
+            overchargeTimer -= Time.deltaTime;
+            // overcharge settings
+        }
+
+        transform.rotation = Quaternion.LookRotation(player.position - transform.position);
     }
 
     override internal void StateUpdate()
     {
+        Debug.Log("state update");
         switch (stateStack.Peek())
         {
             case PowerState.DRAINED:
@@ -59,6 +73,7 @@ public class Enemy : Device
                 {
                     stateStack.Clear();
                     stateStack.Push(PowerState.POWERED);
+                    overchargeTimer = overchargeDuration;
                 }
                 break;
 
