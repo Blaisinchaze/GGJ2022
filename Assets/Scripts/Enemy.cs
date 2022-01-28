@@ -9,6 +9,7 @@ public class Enemy : Device
     [Header("Enemy Settings")]
     public float chargeRatePerSecond;
     public float minDistanceFromPlayer;
+    public float moveSpeed;
 
     NavMeshAgent agent;
     Transform player;
@@ -20,22 +21,24 @@ public class Enemy : Device
     {
         shielded = false;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        rb = GetComponent<Rigidbody>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        StateUpdate();
-
         switch (stateStack.Peek())
         {
             case PowerState.DRAINED:
-                break;
             case PowerState.CHARGING:
                 currentEnergy += chargeRatePerSecond * Time.deltaTime;
+                agent.speed = 0;
                 break;
             case PowerState.POWERED:
+                Debug.Log("Beep");
                 UpdatePathing(player.position);
+                agent.speed = moveSpeed;
                 break;
             default:
                 break;
