@@ -39,7 +39,8 @@ public class Device : MonoBehaviour
     // returns how much over the maxEnergy / how much energy not used
     public float AddEnergy(float input)
     {
-        if (chargeProtection) return input;
+        if (chargeProtection)
+            return input;
 
         float retVal = 0;
         if (currentEnergy + input > maxEnergy)
@@ -57,7 +58,12 @@ public class Device : MonoBehaviour
     // returns how much energy is being not being spent
     public float SpendEnergy(float cost)
     {
-        if (drainProtection) return cost;
+        //float retVal = cost;
+
+        if (currentEnergy - cost < 0)
+            return 0;
+        if (drainProtection)
+            return cost;
 
         float retVal = cost;
 
@@ -69,11 +75,35 @@ public class Device : MonoBehaviour
         currentEnergy -= cost;
         currentEnergy = Mathf.Clamp(currentEnergy, 0, maxEnergy);
 
-        return retVal;
+        //return retVal;
+        return cost;
+    }
+
+    /// <summary>
+    /// Steals energy from a victim, then returns excess energy from the thief
+    /// </summary>
+    /// <param name="victim">The target having energy taken</param>
+    /// <param name="value">Amount of energy being taken</param>
+    public void StealEnergy(Device victim, float value)
+    {
+        float stolenEnergy = victim.SpendEnergy(value);
+        victim.AddEnergy(AddEnergy(stolenEnergy));
     }
 
     internal virtual void StateUpdate()
     {
         powerState = PowerState.POWERED;
+    }
+
+    public IEnumerator StealEnergyOverTime(Device victim, float TimeFromMax)
+    {
+        StealEnergy(victim, victim.maxEnergy / TimeFromMax * Time.deltaTime);
+        yield return 0;
+    }
+    
+    public IEnumerator SendEnergyOverTime(Device receiver, float TimeFromMax)
+    {
+        receiver.StealEnergy(this, maxEnergy / TimeFromMax * Time.deltaTime);
+        yield return 0;
     }
 }

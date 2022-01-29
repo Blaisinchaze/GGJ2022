@@ -122,7 +122,7 @@ public class Enemy : Combatant
                 break;
 
             case PowerState.POWERED:
-                if (currentEnergy <= 0)
+                if (currentEnergy <= 0.1f)
                 {
                     powerState = PowerState.CHARGING;
                 }

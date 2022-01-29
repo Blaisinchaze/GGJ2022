@@ -38,7 +38,7 @@ public class Defence : Device
                 }
                 break;
             case PowerState.POWERED:
-                if (currentEnergy <= 0)
+                if (currentEnergy <= 0.25f)
                 {
                     powerState = PowerState.DRAINED;
                 }
