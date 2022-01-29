@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     [SerializeField]
-    private GameState currentState;
+    private GameState currentState = GameState.PLAYING;
     private GameState prevState = GameState.MAINMENU;
 
     private int score = 0;

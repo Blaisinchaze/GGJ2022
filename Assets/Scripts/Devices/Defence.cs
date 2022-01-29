@@ -12,11 +12,12 @@ public class Defence : Device
     [Space]
     public GameObject target;
 
-    private float attackTimer;
+    internal float attackTimer;
+    private float width = 0.1f;
 
     internal override void Start()
     {
-        currentEnergy = 0;
+        width = GetComponent<Collider>().bounds.size.magnitude;
         powerState = PowerState.DRAINED;
     }
 
@@ -50,27 +51,29 @@ public class Defence : Device
     internal void EnemyDetection()
     {
         LayerMask deviceMask = 1 << LayerMask.NameToLayer("Device");
+
         List<Collider> hits = new List<Collider>(Physics.OverlapSphere(transform.position, range, deviceMask));
 
-        GameObject closest = null;
+        GameObject closest = target;
 
         foreach (Collider hit in hits)
         {
             if (hit.tag == "Enemy")
             {
-                if (Vector3.Distance(transform.position, hit.transform.position) <
-                    Vector3.Distance(transform.position, closest.transform.position) || closest == null)
+                if (closest == null || Vector3.Distance(transform.position, hit.transform.position) <
+                    Vector3.Distance(transform.position, closest.transform.position))
                 {
                     Ray ray = new Ray(transform.position, hit.transform.position - transform.position);
                     RaycastHit rh;
-                    if (Physics.Raycast(ray, out rh, range, ~deviceMask))
+                    if (!Physics.Raycast(ray, out rh, Vector3.Distance(transform.position, hit.transform.position), ~deviceMask))
                     {
+                        Debug.DrawLine(transform.position, hit.transform.position - transform.position, Color.blue, 0.1f);
                         closest = hit.gameObject;
                     }
                 }
             }
         }
 
-        if (closest != null) target = closest;
+        target = closest;
     }
 }

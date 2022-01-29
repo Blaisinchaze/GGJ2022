@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : Device
+public class Enemy : Combatant
 {
     [Header("Enemy Settings")]
     public float chargeRatePerSecond;
@@ -14,7 +14,6 @@ public class Enemy : Device
     public float attackDelay;
     [Space]
     public float moveSpeed;
-    public float health;
     [Space]
     public int scoreValue;
 

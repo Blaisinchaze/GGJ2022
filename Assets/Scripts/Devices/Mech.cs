@@ -8,7 +8,9 @@ public class Mech : Defence
 {
     [Header("Mech Settings")]
     public float moveSpeed;
-    public float maxDistanceFromPlayer;
+    [Space]
+    public float minDistanceFromPlayer;
+    public float maxAggroRange;
 
     NavMeshAgent agent;
     Transform player;
@@ -29,7 +31,7 @@ public class Mech : Defence
         switch (powerState)
         {
             case PowerState.DRAINED:
-                agent.speed = 0;
+                StandStill();
                 break;
             case PowerState.POWERED:
                 PoweredUpdate();
@@ -42,31 +44,46 @@ public class Mech : Defence
 
     private void PoweredUpdate()
     {
-        agent.SetDestination(player.position);
-
-        if (Vector3.Distance(transform.position,player.position) > maxDistanceFromPlayer)
+        if (Vector3.Distance(transform.position, player.position) > minDistanceFromPlayer)
         {
-            Debug.Log("moving");
+            agent.SetDestination(player.position);
             agent.speed = moveSpeed;
         }
         else
         {
-            agent.speed = 0;
+            StandStill();
         }
 
-        if (target == null || Vector3.Distance(target.transform.position, player.position) > range)
+        if (target == null || Vector3.Distance(target.transform.position, transform.position) > range)
         {
+            Debug.Log("enemy check");
             EnemyDetection();
         }
-
-        if (target != null)
+        else
         {
+            Debug.Log("attack check");
             Attack();
         }
     }
 
     private void Attack()
     {
-        Debug.Log("Mech Attack");
+        if (attackTimer <= 0)
+        {
+            Debug.Log("Mech Attack");
+            Debug.DrawLine(transform.position, target.transform.position, Color.red, 0.1f);
+
+            attackTimer = attackDelay;
+        }
+        else
+        {
+            attackTimer -= Time.deltaTime;
+        }
+    }
+
+    private void StandStill()
+    {
+        agent.speed = 0;
+        agent.SetDestination(transform.position);
     }
 }

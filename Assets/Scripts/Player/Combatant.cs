@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Combatant : MonoBehaviour
+public class Combatant : Device
 {
    // Components
    public Renderer myRenderer { get; private set; }
@@ -34,8 +34,9 @@ public class Combatant : MonoBehaviour
 
    }
    
-   protected virtual void Update()
+   internal override void Update()
    {
+      base.Update();
       CheckToggles();
       CheckHealth();
    }
