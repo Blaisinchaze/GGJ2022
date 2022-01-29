@@ -5,7 +5,7 @@ using UnityEngine;
 public class Defence : Device
 {
     [Header("Defence Settings")]
-    public float strength;
+    public int strength;
     public float attackDelay;
     public float hitStunDuration;
     public float range;

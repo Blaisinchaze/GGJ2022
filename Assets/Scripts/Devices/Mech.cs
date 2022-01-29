@@ -56,12 +56,10 @@ public class Mech : Defence
 
         if (target == null || Vector3.Distance(target.transform.position, transform.position) > range)
         {
-            Debug.Log("enemy check");
             EnemyDetection();
         }
         else
         {
-            Debug.Log("attack check");
             Attack();
         }
     }
@@ -70,9 +68,8 @@ public class Mech : Defence
     {
         if (attackTimer <= 0)
         {
-            Debug.Log("Mech Attack");
             Debug.DrawLine(transform.position, target.transform.position, Color.red, 0.1f);
-
+            target.GetComponent<Combatant>().GetHit(strength);
             attackTimer = attackDelay;
         }
         else

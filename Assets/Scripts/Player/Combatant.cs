@@ -10,7 +10,7 @@ public class Combatant : Device
    public Transform myTransform { get; private set; }
    
    // Combat stats
-   
+   [Header("Combat Stats")]
    public bool isAlive;
    public int health;
    public int maxHealth;
@@ -31,7 +31,6 @@ public class Combatant : Device
       myRenderer = GetComponent<Renderer>();
       myTransform = GetComponent<Transform>();
       if (health > maxHealth) maxHealth = health;
-
    }
    
    internal override void Update()

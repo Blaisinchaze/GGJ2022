@@ -56,23 +56,19 @@ public class Enemy : Combatant
 
         drainProtection = powerState != PowerState.POWERED || overchargeTimer > 0;
         attackTimer -= Time.deltaTime;
-
-        if (health <= 0)
-        {
-            Die();
-        }
     }
 
-    private void Die()
+    public override void Die()
     {
         GameManager.Instance.m_EnemyKilled.Invoke(this);
         Destroy(gameObject);
     }
 
-    private void TakeDamage(float dmg)
+    public override void GetHit(int dmg)
     {
-        if (overchargeTimer >= 0) return;
+        if (overchargeTimer >= 0 || invulnerable) return;
 
+        Debug.Log("I take damage");
         health -= dmg;
 
         if (health <= 0)
