@@ -443,6 +443,8 @@ GameObject:
   - component: {fileID: 1911916511}
   - component: {fileID: 1911916510}
   - component: {fileID: 1911916512}
+  - component: {fileID: 1911916513}
+  - component: {fileID: 1911916514}
   m_Layer: 0
   m_Name: GM
   m_TagString: Untagged
@@ -499,6 +501,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InGame: 1
+--- !u!114 &1911916513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911916509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8496a15ebf08224982c117227eecb25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1332319489186304716, guid: b4b9a856865318448ab2aeaf5b8a3e15, type: 3}
+  enemiesAddedPerWave: 1
+  durationAddedPerEnemy: 5
+  minDuration: 10
+  maxDuration: 60
+--- !u!114 &1911916514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911916509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8af5314c156c4c9438c11a9c8bc9e20c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allDoors:
+  - {fileID: 0}
+  m_doorOpened:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &2013951408
 PrefabInstance:
   m_ObjectHideFlags: 0
