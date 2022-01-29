@@ -32,9 +32,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement values")]
     //  ====    Movement
     
-    /// <summary>
-    /// Speed player moves in any direction.
-    /// </summary>
     public float moveSpeed;
     
     /// <summary>
