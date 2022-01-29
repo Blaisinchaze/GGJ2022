@@ -57,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         movementDirection = ConvertInputsToMovementDir();
+        RotateCamera();
     }
 
     private void FixedUpdate()
@@ -64,13 +65,6 @@ public class PlayerMovement : MonoBehaviour
         if (movementDirection != Vector3.zero)
             ExecuteMovement();
         cameraTransform.position = Head.position;
-
-    }
-
-    private void LateUpdate()
-    {
-        //  Move the camera along with the head
-        RotateCamera();
     }
 
     /// <summary>
@@ -87,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private Vector3 ConvertInputsToMovementDir()
     {
-        var inputs = inputManager.GetWASD().normalized;
+        var inputs = inputManager.MovementDirection.normalized;
         
         //  If no input is pressed, exit and don't move player
         if (inputs == Vector2.zero && groundCheck.GetIsGrounded())
@@ -117,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
     {
         var finalSpeed = moveSpeed * 10;
         
-        if (inputManager.GetSprinting())
+        if (inputManager.sprintPressed)
             Rb.velocity = new Vector3(
                 movementDirection.x * (finalSpeed * 1.5f * Time.deltaTime),
                 Rb.velocity.y,
