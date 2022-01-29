@@ -25,6 +25,7 @@ public class WaveManager : MonoBehaviour
 
 
     private List<GameObject> enemies = new List<GameObject>();
+    [SerializeField]
     private float waveTimer;
     private List<int> indexHistory = new List<int>();
 
