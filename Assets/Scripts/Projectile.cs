@@ -5,6 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public int dmg;
+    public GameObject parent;
 
     public void OnTriggerEnter(Collider other)
     {
@@ -14,6 +15,9 @@ public class Projectile : MonoBehaviour
             enemy.GetHit(dmg);
         }
 
-        Destroy(gameObject);
+        if (other.gameObject != parent)
+        {
+            Destroy(gameObject);
+        }
     }
 }

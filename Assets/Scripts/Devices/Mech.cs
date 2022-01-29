@@ -75,8 +75,10 @@ public class Mech : Defence
             attackTimer = attackDelay;
             offset = (target.transform.position - transform.position).normalized;
             GameObject projectile = Instantiate(bulletPrefab, transform.position + offset, Quaternion.identity);
-            projectile.GetComponent<Projectile>().dmg = strength;
-            projectile.GetComponent<Rigidbody>().AddForce(offset * 500);
+            Projectile proj = projectile.GetComponent<Projectile>();
+            proj.dmg = strength;
+            proj.parent = gameObject;
+            projectile.GetComponent<Rigidbody>().AddForce(offset * 50);
         }
         else
         {
