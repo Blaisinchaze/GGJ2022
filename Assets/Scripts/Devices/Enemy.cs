@@ -21,20 +21,24 @@ public class Enemy : Combatant
     private float attackTimer;
 
     NavMeshAgent agent;
-    Transform player;
+    Combatant player;
+    Transform playerT;
+    EnemyFaceUpdate faceHandler;
 
     override internal void Start()
     {
         base.Start();
         overchargeTimer = 0;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerT = GameObject.FindGameObjectWithTag("Player").transform;
+        player = playerT.GetComponentInParent<Combatant>();
         agent = GetComponent<NavMeshAgent>();
+        faceHandler = GetComponentInChildren<EnemyFaceUpdate>();
         agent.updateRotation = false;
     }
 
     override internal void Update()
     {
-        transform.rotation = Quaternion.LookRotation(player.position - transform.position);
+        transform.rotation = Quaternion.LookRotation(playerT.position - transform.position);
 
         if (GameManager.Instance.CurrentState() != GameState.PLAYING) return;
         base.Update();
@@ -44,6 +48,7 @@ public class Enemy : Combatant
             case PowerState.CHARGING:
                 currentEnergy += chargeRatePerSecond * Time.deltaTime;
                 StandStill();
+                faceHandler.QueueFace(Face.DRAINED);
                 break;
 
             case PowerState.POWERED:
@@ -78,21 +83,24 @@ public class Enemy : Combatant
 
     private void PoweredUpdate()
     {
-        agent.SetDestination(player.position);
+        agent.SetDestination(playerT.position);
 
-        if (Vector3.Distance(player.position, transform.position) <= attackDistance)
+        if (Vector3.Distance(playerT.position, transform.position) <= attackDistance)
         {
             StandStill();
             agent.speed = 0;
             if (attackTimer <= 0)
             {
-                //attack
+                Attack();
                 attackTimer = attackDelay;
+                faceHandler.QueueFace(Face.ATTACKING);
+                faceHandler.QueueFace(Face.IN_RANGE);
             }
         }
         else
         {
             agent.speed = moveSpeed;
+            faceHandler.QueueFace(Face.NEUTRAL);
             //any additional move stuff goes here
         }
 
@@ -134,6 +142,11 @@ public class Enemy : Combatant
 
         //Debug.Log("State = " + powerState);
         
+    }
+
+    public void Attack()
+    {
+        player.GetHit(outDmg);
     }
 
     private void StandStill()

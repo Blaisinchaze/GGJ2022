@@ -4,26 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Mech : Defence
+public class Turret : Defence
 {
-    [Header("Mech Settings")]
-    public float moveSpeed;
-    [Space]
-    public float minDistanceFromPlayer;
-    [Space]
-    public float bulletSpeed = 100;
+    [Header("Turret Settings")]
+    public float bulletSpeed = 300;
     public GameObject bulletPrefab;
 
-    NavMeshAgent agent;
-    Transform player;
     private Vector3 offset;
 
     // Start is called before the first frame update
     internal override void Start()
     {
         base.Start();
-        agent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
@@ -34,7 +26,7 @@ public class Mech : Defence
         switch (powerState)
         {
             case PowerState.DRAINED:
-                StandStill();
+                target = null;
                 break;
             case PowerState.POWERED:
                 PoweredUpdate();
@@ -47,15 +39,6 @@ public class Mech : Defence
 
     private void PoweredUpdate()
     {
-        if (Vector3.Distance(transform.position, player.position) > minDistanceFromPlayer)
-        {
-            agent.SetDestination(player.position);
-            agent.speed = moveSpeed;
-        }
-        else
-        {
-            StandStill();
-        }
 
         if (target == null || Vector3.Distance(target.transform.position, transform.position) > range)
         {
@@ -64,6 +47,11 @@ public class Mech : Defence
         else
         {
             Attack();
+        }
+
+        if (target != null)
+        {
+            transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
         }
     }
 
@@ -84,11 +72,5 @@ public class Mech : Defence
         {
             attackTimer -= Time.deltaTime;
         }
-    }
-
-    private void StandStill()
-    {
-        agent.speed = 0;
-        agent.SetDestination(transform.position);
     }
 }

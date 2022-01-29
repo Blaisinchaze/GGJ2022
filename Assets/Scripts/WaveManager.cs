@@ -45,6 +45,7 @@ public class WaveManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        waveNum = 1;
         waveTimer = 5;
         DoorManager.Instance.m_doorOpened.AddListener(AddDoorsSpawners);
     }

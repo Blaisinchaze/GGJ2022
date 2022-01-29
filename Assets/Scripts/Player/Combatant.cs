@@ -61,7 +61,7 @@ public class Combatant : Device
 
    internal void CheckHealth()
    {
-      if (health <= 0 && !invulnerable)
+      if (health <= 0 && !invulnerable && isAlive)
          Die();
    }
 
@@ -70,8 +70,13 @@ public class Combatant : Device
    /// </summary>
    public virtual void Die()
    {
-      Destroy(gameObject);
-   }
+        isAlive = false;
+        if (gameObject.tag == "Player") GameManager.Instance.m_PlayerKilled.Invoke();
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
    
    /// <summary>
    /// What happens when I'm hit by a projectile or melee
