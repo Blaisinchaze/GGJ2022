@@ -8,6 +8,8 @@ using Cursor = UnityEngine.Cursor;
 
 public class InputManager : MonoBehaviour
 {
+    //  ====    Inputs
+    
     /// <summary>
     /// Movement direction determined from pressing WASD
     /// </summary>
@@ -19,7 +21,15 @@ public class InputManager : MonoBehaviour
     /// </summary>
     private Vector2 LookDirection = Vector2.zero;
 
-    private bool jumpPressed = false;
+    /// <summary>
+    /// Delegate to immediately execute jump when space is pressed
+    /// </summary>
+    public delegate void JumpPressed();
+    public JumpPressed onJumpPressed;
+
+    private bool sprintPressed = false;
+    
+    //  ====    End of Inputs
     
     //Replace this when we have a gamestate manager
     public bool InGame = true;
@@ -37,6 +47,8 @@ public class InputManager : MonoBehaviour
 
         UpdateLookDirection();
         UpdateMovementDirection();
+        CheckForJump();
+        CheckForSprint();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.visible = true;
@@ -56,10 +68,11 @@ public class InputManager : MonoBehaviour
         return LookDirection;
     }
 
-    public bool GetIsJumping()
+    public bool GetSprinting()
     {
-        return jumpPressed;
+        return sprintPressed;
     }
+    
     #endregion
     #region Local Stuff
     private void UpdateMovementDirection()
@@ -81,15 +94,18 @@ public class InputManager : MonoBehaviour
         LookDirection = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
     }
 
-    private void UpdateJump()
+    private void CheckForJump()
     {
-        jumpPressed = false;
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            jumpPressed = true;
+            onJumpPressed?.Invoke();
         }
     }
 
+    private void CheckForSprint()
+    {
+        sprintPressed = Input.GetKey(KeyCode.LeftShift);
+    }
 
     #endregion
 }
