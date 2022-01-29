@@ -66,9 +66,8 @@ public class Enemy : Combatant
 
     public override void GetHit(int dmg)
     {
-        if (overchargeTimer >= 0 || invulnerable) return;
+        if (overchargeTimer > 0 || invulnerable) return;
 
-        Debug.Log("I take damage");
         health -= dmg;
 
         if (health <= 0)
