@@ -111,15 +111,14 @@ public class PlayerWiring : MonoBehaviour
     /// <returns></returns>
     private Device TryFindDevice()
     {
-        if (!Physics.CheckSphere(firePoint.position, 0.5f, deviceMask))
-            return null;
-        
+
         Ray ray = new Ray(firePoint.transform.position,cameraTransform.forward);
         RaycastHit hit;
         float sphereSize = 0.35f;
-        float sphereDist = 5f;
+        float sphereDist = 20f;
         var devices = Physics.SphereCastAll(ray, sphereSize, sphereDist, 
             deviceMask, QueryTriggerInteraction.Collide);
+        if (devices.Length <= 0) return null;
 
 
         float loopSphereSize = sphereSize;
