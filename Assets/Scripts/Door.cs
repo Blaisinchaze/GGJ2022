@@ -6,9 +6,19 @@ public class Door : Device
 {
     [Header("Door Settings")]
     public float yIncrease;
+    public float speed;
+    [Space]
     public bool isOpen;
     [Space]
     public Transform[] spawnPoints = new Transform[1];
+
+    private Vector3 startPos;
+
+    internal override void Start()
+    {
+        base.Start();
+        startPos = transform.position;
+    }
 
     internal override void Update()
     {
@@ -16,6 +26,11 @@ public class Door : Device
         if (powerState == PowerState.POWERED && !isOpen)
         {
             Open();
+        }
+
+        if (isOpen)
+        {
+            transform.position = Vector3.Lerp(transform.position, startPos + new Vector3(0, yIncrease, 0), speed * Time.deltaTime);
         }
     }
 
