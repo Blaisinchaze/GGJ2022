@@ -12,6 +12,7 @@ public class Mech : Defence
     public float minDistanceFromPlayer;
     //public float maxAggroRange;
     [Space]
+    public float bulletSpeed = 100;
     public GameObject bulletPrefab;
 
     NavMeshAgent agent;
@@ -78,7 +79,7 @@ public class Mech : Defence
             Projectile proj = projectile.GetComponent<Projectile>();
             proj.dmg = strength;
             proj.parent = gameObject;
-            projectile.GetComponent<Rigidbody>().AddForce(offset * 50);
+            projectile.GetComponent<Rigidbody>().AddForce(offset * bulletSpeed);
         }
         else
         {

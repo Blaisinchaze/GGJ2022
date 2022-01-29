@@ -2416,6 +2416,8 @@ GameObject:
   - component: {fileID: 800475581}
   - component: {fileID: 800475580}
   - component: {fileID: 800475579}
+  - component: {fileID: 800475583}
+  - component: {fileID: 800475582}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -2472,6 +2474,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &800475582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800475578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8af5314c156c4c9438c11a9c8bc9e20c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allDoors:
+  - {fileID: 0}
+  m_doorOpened:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &800475583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800475578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8496a15ebf08224982c117227eecb25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  enemiesAddedPerWave: 0
+  durationAddedPerEnemy: 0
+  minDuration: 0
+  maxDuration: 0
 --- !u!1 &831460742
 GameObject:
   m_ObjectHideFlags: 0

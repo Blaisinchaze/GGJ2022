@@ -19,12 +19,13 @@ public class WaveManager : MonoBehaviour
     public float durationAddedPerEnemy;
     public float minDuration;
     public float maxDuration;
-
-    private float waveTimer;
-
-    private List<GameObject> enemies = new List<GameObject>();
+    [Space]
+    [SerializeField]
     private List<Transform> activeSpawners = new List<Transform>();
 
+
+    private List<GameObject> enemies = new List<GameObject>();
+    private float waveTimer;
     private List<int> indexHistory = new List<int>();
 
     private void Awake()
