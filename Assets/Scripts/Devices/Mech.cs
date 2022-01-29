@@ -10,10 +10,13 @@ public class Mech : Defence
     public float moveSpeed;
     [Space]
     public float minDistanceFromPlayer;
-    public float maxAggroRange;
+    //public float maxAggroRange;
+    [Space]
+    public GameObject bulletPrefab;
 
     NavMeshAgent agent;
     Transform player;
+    private Vector3 offset;
 
     // Start is called before the first frame update
     internal override void Start()
@@ -68,9 +71,12 @@ public class Mech : Defence
     {
         if (attackTimer <= 0)
         {
-            Debug.DrawLine(transform.position, target.transform.position, Color.red, 0.1f);
-            target.GetComponent<Combatant>().GetHit(strength);
+            //target.GetComponent<Combatant>().GetHit(strength);
             attackTimer = attackDelay;
+            offset = (target.transform.position - transform.position).normalized;
+            GameObject projectile = Instantiate(bulletPrefab, transform.position + offset, Quaternion.identity);
+            projectile.GetComponent<Projectile>().dmg = strength;
+            projectile.GetComponent<Rigidbody>().AddForce(offset * 500);
         }
         else
         {
