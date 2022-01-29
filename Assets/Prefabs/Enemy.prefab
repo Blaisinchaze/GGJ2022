@@ -112,7 +112,7 @@ MonoBehaviour:
   maxEnergy: 100
   energyLossPerSecond: 10
   minActiveEnergy: 0
-  currentEnergy: 0
+  currentEnergy: 100
   isAlive: 0
   health: 10
   maxHealth: 10

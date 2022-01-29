@@ -25,7 +25,7 @@ public class Device : MonoBehaviour
     // For any device Start make sure you call base.Start() and your start function is an override
     internal virtual void Start()
     {
-        currentEnergy = maxEnergy;
+        //currentEnergy = maxEnergy;
         powerState = PowerState.POWERED;
     }
 

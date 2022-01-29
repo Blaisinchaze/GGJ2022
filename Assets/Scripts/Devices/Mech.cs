@@ -10,7 +10,6 @@ public class Mech : Defence
     public float moveSpeed;
     [Space]
     public float minDistanceFromPlayer;
-    //public float maxAggroRange;
     [Space]
     public float bulletSpeed = 100;
     public GameObject bulletPrefab;
