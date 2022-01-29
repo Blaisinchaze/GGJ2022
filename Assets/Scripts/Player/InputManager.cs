@@ -9,17 +9,18 @@ using Cursor = UnityEngine.Cursor;
 public class InputManager : MonoBehaviour
 {
     //  ====    Inputs
-    
+
     /// <summary>
     /// Movement direction determined from pressing WASD
     /// </summary>
     /// <returns></returns>
-    private Vector2 MovementDirection = Vector2.zero;
+    public Vector2 MovementDirection { get; private set; }= Vector2.zero;
+    
 
     /// <summary>
     /// Look direction determined from moving the mouse
     /// </summary>
-    private Vector2 LookDirection = Vector2.zero;
+    public Vector2 LookDirection { get; private set; } = Vector2.zero;
 
     /// <summary>
     /// Delegate to immediately execute jump when space is pressed
@@ -27,8 +28,16 @@ public class InputManager : MonoBehaviour
     public delegate void JumpPressed();
     public JumpPressed onJumpPressed;
 
-    private bool sprintPressed = false;
+    public bool sprintPressed { get; private set; }= false;
+
     
+    public delegate void MouseClicked();
+    public MouseClicked onLeftMouseClick;
+    public MouseClicked onRightMouseClick;
+    
+    public bool LeftMouseHeld { get; private set; }
+    public bool RightMouseHeld { get; private set; }
+
     //  ====    End of Inputs
     
     //Replace this when we have a gamestate manager
@@ -49,31 +58,15 @@ public class InputManager : MonoBehaviour
         UpdateMovementDirection();
         CheckForJump();
         CheckForSprint();
+        CheckForLeftMouseClick();
+        CheckForRightMouseClick();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
     }
-
-    #region Public Calls
-
-    public Vector2 GetWASD()
-    {
-        return MovementDirection;
-    }
-
-    public Vector2 GetMouseDir()
-    {
-        return LookDirection;
-    }
-
-    public bool GetSprinting()
-    {
-        return sprintPressed;
-    }
     
-    #endregion
     #region Local Stuff
     private void UpdateMovementDirection()
     {
@@ -97,10 +90,28 @@ public class InputManager : MonoBehaviour
     private void CheckForJump()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-        {
             onJumpPressed?.Invoke();
-        }
     }
+
+    private void CheckForLeftMouseClick()
+    {
+        if (Input.GetMouseButtonDown(0))
+            onLeftMouseClick?.Invoke();
+        if (Input.GetMouseButton(0))
+            LeftMouseHeld = true;
+        if (Input.GetMouseButtonUp(0))
+            LeftMouseHeld = false;
+    }
+    private void CheckForRightMouseClick()
+    {
+        if (Input.GetMouseButtonDown(1))
+            onRightMouseClick?.Invoke();
+        if (Input.GetMouseButton(1))
+            RightMouseHeld = true;
+        if (Input.GetMouseButtonUp(1))
+            RightMouseHeld = false;
+    }
+    
 
     private void CheckForSprint()
     {
