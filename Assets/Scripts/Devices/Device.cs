@@ -13,18 +13,20 @@ public class Device : MonoBehaviour
 {
     [Header("Device Settings")]
     public float maxEnergy;
-    public float minActiveEnergy;
     public float energyLossPerSecond;
+    public float minActiveEnergy;
     [Space]
     [SerializeField]
     internal float currentEnergy;
-    internal Stack<PowerState> stateStack = new Stack<PowerState>();
+    internal PowerState powerState;
+    internal bool drainProtection;
+    internal bool chargeProtection;
 
     // For any device Start make sure you call base.Start() and your start function is an override
     internal virtual void Start()
     {
         currentEnergy = maxEnergy;
-        stateStack.Push(PowerState.POWERED);
+        powerState = PowerState.POWERED;
     }
 
     // For any device update make sure you call base.Update() and your update function is an override
@@ -34,9 +36,11 @@ public class Device : MonoBehaviour
         SpendEnergy(energyLossPerSecond * Time.deltaTime);
     }
 
-    // returns how much over the maxEnergy
+    // returns how much over the maxEnergy / how much energy not used
     public float AddEnergy(float input)
     {
+        if (chargeProtection) return input;
+
         float retVal = 0;
         if (currentEnergy + input > maxEnergy)
         {
@@ -47,18 +51,19 @@ public class Device : MonoBehaviour
 
         currentEnergy = Mathf.Clamp(currentEnergy, 0, maxEnergy);
 
-
         return retVal;
     }
-
-    // returns how much energy is being spent
+    
+    // returns how much energy is being not being spent
     public float SpendEnergy(float cost)
     {
+        if (drainProtection) return cost;
+
         float retVal = cost;
 
         if (currentEnergy - cost < 0)
         {
-            retVal = currentEnergy;
+            retVal = Mathf.Abs(currentEnergy - cost);
         }
 
         currentEnergy -= cost;
@@ -69,9 +74,6 @@ public class Device : MonoBehaviour
 
     internal virtual void StateUpdate()
     {
-        if (stateStack.Count == 0)
-        {
-            stateStack.Push(PowerState.CHARGING);
-        }
+        powerState = PowerState.POWERED;
     }
 }
