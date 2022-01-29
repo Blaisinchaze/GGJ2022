@@ -44,12 +44,11 @@ public class PlayerWiring : MonoBehaviour
         if (inputManager.LeftMouseHeld)
         {
             StartCoroutine(playerDevice.StealEnergyOverTime(target, 5f));
-            print("Player: " +playerDevice.currentEnergy +", Enemy: " +target.currentEnergy);
         }
         else if (inputManager.RightMouseHeld)
         {
-            target.StealEnergy(playerDevice, 1);
-            print("Player: " +playerDevice.currentEnergy +", Enemy: " +target.currentEnergy);
+            StartCoroutine(playerDevice.SendEnergyOverTime(target, 5f));
+
         } 
         if (!inputManager.LeftMouseHeld)
         {
@@ -62,7 +61,7 @@ public class PlayerWiring : MonoBehaviour
 
     private bool DetachFromDistance()
     {
-        if (Vector3.Distance(Head.transform.position, target.transform.position) > 1.5f)
+        if (Vector3.Distance(Head.transform.position, tether.transform.position) > 3.5f)
         {
             return true;
         }
@@ -76,9 +75,11 @@ public class PlayerWiring : MonoBehaviour
     {
         targetAttached = target != null;
         if (targetAttached && !DetachFromDistance()) return false;
-        tether.SetActive(false);
         tether.transform.parent = null;
+        tether.transform.position = Vector3.zero;
+        tether.transform.rotation = Head.transform.rotation;
         tether.transform.localScale = new Vector3(0.15f,0.15f,0.15f);
+        tether.SetActive(false);
         tetherPoint = Vector3.zero;
         target = null;
         return true;
@@ -94,8 +95,12 @@ public class PlayerWiring : MonoBehaviour
 
     private void AttachTether()
     {
-        tether.SetActive(true);
-        tether.transform.position = tetherPoint;
+        if (!tether.activeSelf)
+        {
+            tether.SetActive(true);
+            tether.transform.position = tetherPoint;
+        }
+
         //tether.transform.LookAt(Head.transform.position);
         tether.transform.rotation = Quaternion.FromToRotation(transform.up, tetherNormal);
         tether.transform.parent = target.transform;
@@ -112,17 +117,16 @@ public class PlayerWiring : MonoBehaviour
         Ray ray = new Ray(firePoint.transform.position,cameraTransform.forward);
         RaycastHit hit;
         float sphereSize = 0.35f;
-        float sphereDist = 1.25f;
+        float sphereDist = 5f;
         var devices = Physics.SphereCastAll(ray, sphereSize, sphereDist, 
             deviceMask, QueryTriggerInteraction.Collide);
-        Debug.DrawRay(ray.origin, ray.direction * 1.25f);
 
 
         float loopSphereSize = sphereSize;
         float loopShereDist = sphereDist;
         int lCatch = 30;
         int l = 0;
-        Device newTarget = new Device();
+        Device targetDevice = null;
         while (l < lCatch )
         {
             loopSphereSize *= 0.65f;
@@ -133,12 +137,12 @@ public class PlayerWiring : MonoBehaviour
             {
                 tetherPoint = nCast[0].point;
                 tetherNormal = nCast[0].normal;
-                newTarget = nCast[0].transform.GetComponent<Device>();
+                nCast[0].transform.TryGetComponent(out targetDevice);
             }
 
             if (nCast.Length == 0)
             {
-                return newTarget;
+                return targetDevice;
             }
             l++;
             devices = nCast;
@@ -154,7 +158,6 @@ public class PlayerWiring : MonoBehaviour
         }
         System.Array.Sort(distances);
         deviceLocations.TryGetValue(distances[0], out hit);
-        Device targetDevice = null;
         hit.transform.TryGetComponent(out targetDevice);
         tetherPoint = hit.point;
         tetherNormal = hit.normal;

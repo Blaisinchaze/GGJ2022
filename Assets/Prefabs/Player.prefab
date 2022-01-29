@@ -123,7 +123,6 @@ GameObject:
   - component: {fileID: 4922139547572719231}
   - component: {fileID: 1322723380}
   - component: {fileID: 1322723381}
-  - component: {fileID: 1322723382}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -179,6 +178,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48f5c0d718cd953489878fbfc95baae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxEnergy: 100
+  energyLossPerSecond: 0
+  minActiveEnergy: 0
+  currentEnergy: 0
   isAlive: 1
   health: 5
   maxHealth: 5
@@ -201,7 +204,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 4922139548368481117}
   Head: {fileID: 4922139547684779182}
   firePoint: {fileID: 513108329}
-  playerDevice: {fileID: 1322723382}
+  playerDevice: {fileID: 1322723380}
   deviceMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -209,22 +212,6 @@ MonoBehaviour:
   tetherPoint: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
   drainTime: 0
---- !u!114 &1322723382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4922139547572719229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af90edb0442ed3648b02075f67a0c658, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxEnergy: 100
-  minActiveEnergy: 1
-  energyLossPerSecond: 0
-  currentEnergy: 1
 --- !u!1 &4922139547684779182
 GameObject:
   m_ObjectHideFlags: 0

@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         //  If no input is pressed, exit and don't move player
         if (inputs == Vector2.zero && groundCheck.GetIsGrounded())
         {
-            Rb.velocity = Vector3.zero;
+            Rb.velocity = new Vector3(0, Rb.velocity.y,0);
             return Vector3.zero;
         }
         
