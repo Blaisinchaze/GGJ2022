@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Combatant : MonoBehaviour
+public class Combatant : Device
 {
    // Components
    public Renderer myRenderer { get; private set; }
    public Transform myTransform { get; private set; }
    
    // Combat stats
-   
+   [Header("Combat Stats")]
    public bool isAlive;
    public int health;
    public int maxHealth;
@@ -31,11 +31,11 @@ public class Combatant : MonoBehaviour
       myRenderer = GetComponent<Renderer>();
       myTransform = GetComponent<Transform>();
       if (health > maxHealth) maxHealth = health;
-
    }
    
-   protected virtual void Update()
+   internal override void Update()
    {
+      base.Update();
       CheckToggles();
       CheckHealth();
    }
