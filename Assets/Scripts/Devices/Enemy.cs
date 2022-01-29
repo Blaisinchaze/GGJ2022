@@ -43,7 +43,7 @@ public class Enemy : Combatant
         {
             case PowerState.CHARGING:
                 currentEnergy += chargeRatePerSecond * Time.deltaTime;
-                agent.speed = 0;
+                StandStill();
                 break;
 
             case PowerState.POWERED:
@@ -82,6 +82,7 @@ public class Enemy : Combatant
 
         if (Vector3.Distance(player.position, transform.position) <= attackDistance)
         {
+            StandStill();
             agent.speed = 0;
             if (attackTimer <= 0)
             {
@@ -133,5 +134,11 @@ public class Enemy : Combatant
 
         //Debug.Log("State = " + powerState);
         
+    }
+
+    private void StandStill()
+    {
+        agent.speed = 0;
+        agent.SetDestination(transform.position);
     }
 }
