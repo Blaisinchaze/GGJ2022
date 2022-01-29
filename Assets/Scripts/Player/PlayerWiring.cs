@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 public class PlayerWiring : MonoBehaviour
 {
@@ -13,10 +14,19 @@ public class PlayerWiring : MonoBehaviour
     [SerializeField] private Device playerDevice;
     [SerializeField] private LayerMask deviceMask;
     [SerializeField] private GameObject tether;
+    [SerializeField] private Tether tetherScript;
     
     [Header("Combat")] 
     [SerializeField] private Vector3 tetherPoint;
 
+    //  Rotation stored to track where player is looking and break tether
+    private Quaternion storedRot;
+
+    public delegate void TetherAttachDel();
+    public delegate void TetherDetachDel();
+    public TetherAttachDel OnTetherAttach;
+    public TetherDetachDel OnTetherDetach;
+    
     private Vector3 tetherNormal;
     [SerializeField] private Device target;
     private bool targetAttached = false;
@@ -27,6 +37,9 @@ public class PlayerWiring : MonoBehaviour
     {
         inputManager.onLeftMouseClick += GetNewTarget;
         inputManager.onRightMouseClick += GetNewTarget;
+        OnTetherAttach += tetherScript.OnTetherAttach;
+        OnTetherDetach += tetherScript.OnTetherDetach;
+        OnTetherDetach += ResetTether;
     }
 
     // Update is called once per frame
@@ -38,34 +51,28 @@ public class PlayerWiring : MonoBehaviour
     private void InteractTarget()
     {
         if (CatchDetach()) return;
-        //if (!targetAttached) return;
         AttachTether();
 
-        if (inputManager.LeftMouseHeld)
-        {
+        if (inputManager.RightMouseHeld)
             StartCoroutine(playerDevice.StealEnergyOverTime(target, 5f));
-        }
-        else if (inputManager.RightMouseHeld)
-        {
+        else if (inputManager.LeftMouseHeld)
             StartCoroutine(playerDevice.SendEnergyOverTime(target, 5f));
-
-        } 
-        if (!inputManager.LeftMouseHeld)
-        {
+        if (!inputManager.RightMouseHeld)
             StopCoroutine(playerDevice.StealEnergyOverTime(target, 5f));
-        }
-        else if (!inputManager.RightMouseHeld)  
-        {
-        }
+        else if (!inputManager.LeftMouseHeld)  
+            StopCoroutine(playerDevice.SendEnergyOverTime(target, 5f));
     }
 
     private bool DetachFromDistance()
     {
-        if (Vector3.Distance(Head.transform.position, tether.transform.position) > 3.5f)
-        {
+        //  Measure distance between player and device, if it's too great then snap the tether
+        if (Vector3.Distance(Head.transform.position, tether.transform.position) > 4f)
             return true;
-        }
 
+        //  Measure the angle the player is looking, if it's too far then snap the tether
+        var lookingAngle = Quaternion.Angle(cameraTransform.localRotation, storedRot);
+        if (lookingAngle > 45)
+            return true;
         return false;
     }
     /// <summary>
@@ -75,14 +82,20 @@ public class PlayerWiring : MonoBehaviour
     {
         targetAttached = target != null;
         if (targetAttached && !DetachFromDistance()) return false;
+        OnTetherDetach?.Invoke();
+        return true;
+    }
+
+    private void ResetTether()
+    {
         tether.transform.parent = null;
         tether.transform.position = Vector3.zero;
         tether.transform.rotation = Head.transform.rotation;
         tether.transform.localScale = new Vector3(0.15f,0.15f,0.15f);
         tether.SetActive(false);
         tetherPoint = Vector3.zero;
+        storedRot = cameraTransform.localRotation;
         target = null;
-        return true;
     }
     private void GetNewTarget()
     {
@@ -91,6 +104,8 @@ public class PlayerWiring : MonoBehaviour
         if (_target == null)
             return;
         target = _target;
+        AttachTether();
+        
     }
 
     private void AttachTether()
@@ -99,9 +114,15 @@ public class PlayerWiring : MonoBehaviour
         {
             tether.SetActive(true);
             tether.transform.position = tetherPoint;
+            OnTetherAttach?.Invoke();
         }
 
         //tether.transform.LookAt(Head.transform.position);
+        var direction = new Vector3(tether.transform.position.x - cameraTransform.position.x,
+            tether.transform.position.y - cameraTransform.position.y,
+            tether.transform.position.z - cameraTransform.position.z).normalized;
+        storedRot = Quaternion.LookRotation(direction, Vector3.up);
+
         tether.transform.rotation = Quaternion.FromToRotation(transform.up, tetherNormal);
         tether.transform.parent = target.transform;
     }
