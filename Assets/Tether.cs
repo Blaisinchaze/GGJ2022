@@ -16,6 +16,7 @@ public class Tether : MonoBehaviour
     [SerializeField] private GameObject tether;
     [SerializeField] private GameObject playerHands;
     [SerializeField] private GameObject playerGun;
+    //[SerializeField] private animator gunAnimator;
     private bool Activated;
     
     // Start is called before the first frame update
@@ -25,7 +26,7 @@ public class Tether : MonoBehaviour
         jointA.SetActive(false);
         jointB.SetActive(false);
         lineObject.SetActive(false);
-
+        //gunAnimator = playerGun.GetComponent<Animator>();
     }
 
     public void OnTetherAttach()
@@ -38,7 +39,8 @@ public class Tether : MonoBehaviour
 
     public void OnTetherDetach()
     {
-        playerGun.SetActive(true);           
+        playerGun.SetActive(true);
+        //playerGun.setBool("Attacking", false);
         lineObject.SetActive(false);
         jointA.SetActive(false);
         jointB.SetActive(false);
@@ -55,7 +57,8 @@ public class Tether : MonoBehaviour
             jointA.transform.position = playerHands.transform.position;
             lineObject.GetComponent<LineRenderer>().SetPositions(new[] {jointA.transform.position, jointB.transform.position});
             
-            playerGun.SetActive(false);           
+            playerGun.SetActive(false);   
+            //playerGun.setBool("Attacking", true);
             lineObject.SetActive(true);
             jointA.SetActive(true);
             jointB.SetActive(true);

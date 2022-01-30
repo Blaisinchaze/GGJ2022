@@ -12,7 +12,7 @@ public class WaveManager : MonoBehaviour
     }
     #endregion
 
-    int waveNum = 0;
+    public int waveNum = 0;
     public GameObject prefab;
     [Space]
     public int enemiesAddedPerWave;

@@ -183,4 +183,9 @@ public class PlayerWiring : MonoBehaviour
         tetherNormal = hit.normal;
         return targetDevice;
     }
+
+    public Device getCurrentConnectedDevice()
+    {
+        return target;
+    }
 }
