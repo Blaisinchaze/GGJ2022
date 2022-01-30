@@ -672,7 +672,7 @@ MonoBehaviour:
   hitStunDuration: 0
   range: 4
   target: {fileID: 0}
-  bulletSpeed: 300
+  bulletSpeed: 500
   bulletPrefab: {fileID: 1720609349537398333, guid: 3685b706b8da3264986c25ed6733cbf3, type: 3}
   shootSound: {fileID: 6030335385863481836}
 --- !u!82 &6030335385863481836

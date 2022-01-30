@@ -808,7 +808,7 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 1024
-  explosionRange: 0
+  explosionRange: 3
 --- !u!114 &1054157027
 MonoBehaviour:
   m_ObjectHideFlags: 0
