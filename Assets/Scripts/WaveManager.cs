@@ -46,23 +46,20 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         waveNum = 1;
-        waveTimer = 5;
+        minDuration = 10;
+        waveTimer = minDuration;
         DoorManager.Instance.m_doorOpened.AddListener(AddDoorsSpawners);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (waveTimer > 0)
-        //{
-        //    waveTimer -= Time.deltaTime;
-        //}
-        //else
-        //{
-        //    SpawnWave();
-        //}
+        if (waveTimer > 0)
+        {
+            waveTimer -= Time.deltaTime;
+        }
 
-        if (enemies.Count == 0)
+        if (enemies.Count == 0 && waveTimer <= 0)
         {
             SpawnWave();
         }
@@ -102,7 +99,7 @@ public class WaveManager : MonoBehaviour
             waveTimer += durationAddedPerEnemy;
         }
 
-        waveTimer = Mathf.Clamp(waveTimer, minDuration, maxDuration);
+        waveTimer = minDuration;
         waveNum++;
     }
 
