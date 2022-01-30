@@ -30,8 +30,6 @@ public class VendingMachine : Device
         chargeProtection = cdTimer > 0;
 
         if (cdTimer > 0) cdTimer -= Time.deltaTime;
-
-        transform.Rotate(Vector3.up, 15.0f);
     }
 
     private void Dispense()

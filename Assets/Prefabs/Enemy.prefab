@@ -127,6 +127,7 @@ MonoBehaviour:
   attackDelay: 1
   moveSpeed: 1
   scoreValue: 1
+  deadMat: {fileID: 2100000, guid: 38f0ca5c328d58c4b8a1c9fabd24a65f, type: 2}
 --- !u!195 &1332319489186304709
 NavMeshAgent:
   m_ObjectHideFlags: 0

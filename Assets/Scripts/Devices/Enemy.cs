@@ -43,8 +43,9 @@ public class Enemy : Combatant
     override internal void Update()
     {
         transform.rotation = Quaternion.LookRotation(playerT.position - transform.position);
+        isAlive = health > 0;
 
-        if (GameManager.Instance.CurrentState() != GameState.PLAYING) return;
+        if (GameManager.Instance.CurrentState() != GameState.PLAYING || !isAlive) return;
         base.Update();
         
         switch (powerState)
@@ -65,6 +66,7 @@ public class Enemy : Combatant
 
         drainProtection = powerState != PowerState.POWERED || overchargeTimer > 0;
         attackTimer -= Time.deltaTime;
+
     }
 
     public override void Die()
@@ -72,8 +74,11 @@ public class Enemy : Combatant
         isAlive = false;
         GameManager.Instance.m_EnemyKilled.Invoke(this);
         rend.material = deadMat;
-
-        Destroy(gameObject, 5);
+        faceHandler.gameObject.SetActive(false);
+        gameObject.layer = 1 << 0;
+        GetComponent<Collider>().enabled = false;
+        //Destroy(this);
+        //Destroy(gameObject, 1);
     }
 
     public override void GetHit(int dmg)
