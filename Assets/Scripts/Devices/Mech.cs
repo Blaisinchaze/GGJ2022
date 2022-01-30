@@ -17,7 +17,7 @@ public class Mech : Defence
     NavMeshAgent agent;
     Transform player;
     private Vector3 offset;
-
+    [SerializeField] AudioSource shootSound;
     // Start is called before the first frame update
     internal override void Start()
     {
@@ -89,6 +89,7 @@ public class Mech : Defence
             proj.dmg = strength;
             proj.parent = gameObject;
             projectile.GetComponent<Rigidbody>().AddForce(offset * bulletSpeed);
+            shootSound.Play();
         }
         else
         {

@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     private GameState currentState = GameState.PLAYING;
     private GameState prevState = GameState.MAINMENU;
 
-    private int score = 0;
+    public int score = 0;
 
     #region Events
     public EnemyEvent m_EnemyKilled = new EnemyEvent();

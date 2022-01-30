@@ -111,18 +111,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 238f77a4defa2884c93da050bbb4686a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnergy: 100
+  maxEnergy: 50
   energyLossPerSecond: 0
-  minActiveEnergy: 100
-  currentEnergy: 100
+  minActiveEnergy: 50
+  currentEnergy: 50
   isAlive: 0
-  health: 10
-  maxHealth: 10
+  health: 5
+  maxHealth: 5
   outDmg: 1
   kill: 0
   invulnerable: 0
-  chargeRatePerSecond: 25
-  overchargeDuration: 0
+  chargeRatePerSecond: 10
+  overchargeDuration: 1
   attackDistance: 1
   attackDelay: 1
   moveSpeed: 2

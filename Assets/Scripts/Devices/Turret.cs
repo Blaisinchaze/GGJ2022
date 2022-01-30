@@ -11,7 +11,7 @@ public class Turret : Defence
     public GameObject bulletPrefab;
 
     private Vector3 offset;
-
+    [SerializeField] AudioSource shootSound;
     // Start is called before the first frame update
     internal override void Start()
     {
@@ -67,6 +67,7 @@ public class Turret : Defence
             proj.dmg = strength;
             proj.parent = gameObject;
             projectile.GetComponent<Rigidbody>().AddForce(offset * bulletSpeed);
+            shootSound.Play();
         }
         else
         {
