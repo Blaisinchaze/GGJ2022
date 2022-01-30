@@ -32,11 +32,11 @@ public class UIController : MonoBehaviour
     {
         health.text = playerCombatant.health.ToString();
         wave.text = waveManager.waveNum.ToString();
-        power.text = ((int)playerCombatant.currentEnergy).ToString() + "%";
+        power.text = ((int)((playerCombatant.currentEnergy/playerCombatant.maxEnergy)*100)).ToString() + "%";
         if(playerWiring.getCurrentConnectedDevice() != null)
         {
 
-            devicePower.text = ((int)playerWiring.getCurrentConnectedDevice().currentEnergy).ToString() + "%";
+            devicePower.text = ((int)((playerWiring.getCurrentConnectedDevice().currentEnergy/ playerWiring.getCurrentConnectedDevice().maxEnergy)*100)).ToString() + "%";
             deviceName.text = playerWiring.getCurrentConnectedDevice().gameObject.name;
             
         }
