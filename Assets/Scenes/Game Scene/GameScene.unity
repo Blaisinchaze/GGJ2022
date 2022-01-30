@@ -1376,6 +1376,10 @@ PrefabInstance:
       propertyPath: inputManager
       value: 
       objectReference: {fileID: 800475579}
+    - target: {fileID: 1322723381, guid: 94ef6484b6bbc0c49ba894eb76527cd9, type: 3}
+      propertyPath: tether
+      value: 
+      objectReference: {fileID: 929877947}
     - target: {fileID: 4922139547572719228, guid: 94ef6484b6bbc0c49ba894eb76527cd9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15.82
@@ -7112,6 +7116,11 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!1 &929877947 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1257017642853348777, guid: 94ef6484b6bbc0c49ba894eb76527cd9, type: 3}
+  m_PrefabInstance: {fileID: 110350485}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &937476186
 GameObject:
   m_ObjectHideFlags: 0
