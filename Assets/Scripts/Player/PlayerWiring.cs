@@ -103,6 +103,7 @@ public class PlayerWiring : MonoBehaviour
 
     private void CheckEnemyDead(Enemy enemy)
     {
+        if (!targetAttached) return;
         if (target.GetComponent<Enemy>() == enemy)
             target = null;
     }
