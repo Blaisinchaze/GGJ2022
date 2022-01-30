@@ -10,6 +10,9 @@ public class PanicButton : MonoBehaviour
 
     [SerializeField] private Transform camera;
     [SerializeField] private LayerMask enemyMask;
+
+    [Header("Explosion")]
+    public float explosionRange;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +27,7 @@ public class PanicButton : MonoBehaviour
             Ray ray = new Ray();
             ray.origin = camera.position;
             ray.direction = camera.forward;
-            var enemies = Physics.SphereCastAll(ray, 7.5f, 1f, enemyMask);
+            var enemies = Physics.SphereCastAll(ray, explosionRange, 1f, enemyMask);
             foreach (var enemy in enemies)
             {
                 if (!enemy.transform.CompareTag("Enemy")) continue;
