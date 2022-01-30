@@ -112,8 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxEnergy: 100
-  energyLossPerSecond: 10
-  minActiveEnergy: 0
+  energyLossPerSecond: 0
+  minActiveEnergy: 100
   currentEnergy: 100
   isAlive: 0
   health: 10
@@ -125,7 +125,7 @@ MonoBehaviour:
   overchargeDuration: 0
   attackDistance: 1
   attackDelay: 1
-  moveSpeed: 1
+  moveSpeed: 2
   scoreValue: 1
   deadMat: {fileID: 2100000, guid: 38f0ca5c328d58c4b8a1c9fabd24a65f, type: 2}
 --- !u!195 &1332319489186304709
