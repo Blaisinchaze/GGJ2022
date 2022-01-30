@@ -30,10 +30,12 @@ public class VendingMachine : Device
         chargeProtection = cdTimer > 0;
 
         if (cdTimer > 0) cdTimer -= Time.deltaTime;
+
+        transform.Rotate(Vector3.up, 15.0f);
     }
 
     private void Dispense()
     {
-        Instantiate(prefab, transform.position + transform.forward + transform.up, Quaternion.identity);
+        Instantiate(prefab, transform.position + (transform.forward * 1.25f), Quaternion.identity);
     }
 }
