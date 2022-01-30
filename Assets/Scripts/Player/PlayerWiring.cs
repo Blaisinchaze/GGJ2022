@@ -32,6 +32,8 @@ public class PlayerWiring : MonoBehaviour
     private bool targetAttached = false;
     public float drainTime;
 
+    [SerializeField] AudioSource buzzNoise;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +50,23 @@ public class PlayerWiring : MonoBehaviour
     void Update()
     {
         InteractTarget();
-    }
+        if (buzzNoise.isPlaying)
+        {
+            switch (tetherScript.currentTetherState)
+            {
+                case Tether.tetherAction.Neutral:
+                    break;
+                case Tether.tetherAction.Sending:
+                    buzzNoise.pitch = Mathf.Abs((playerDevice.currentEnergy / 40) + 0.5f);
+                    break;
+                case Tether.tetherAction.Taking:
+                    buzzNoise.pitch = Mathf.Abs((playerDevice.currentEnergy / 40) + 0.5f) * -1 ;
+                    break;
+                default:
+                    break;
+            }
+        }
+        }
 
     private void InteractTarget()
     {
@@ -120,6 +138,10 @@ public class PlayerWiring : MonoBehaviour
         tetherPoint = Vector3.zero;
         storedRot = cameraTransform.localRotation;
         target = null;
+        if (buzzNoise.isPlaying)
+        {
+            buzzNoise.Stop();
+        }
     }
     /// <summary>
     /// Find a target and tether to it if not null
@@ -159,7 +181,11 @@ public class PlayerWiring : MonoBehaviour
         tether.transform.localScale = new Vector3(0.15f,0.15f,0.15f);
         tetherScript.playerLocation = firePoint.position;
         tetherScript.tetherLocation = tether.transform.position;
+        if(!buzzNoise.isPlaying)
+        {
 
+            buzzNoise.Play();
+        }
     }
     /// <summary>
     /// Launch a spherecast forward, find the closest device to the origin and assign that as the new target.
