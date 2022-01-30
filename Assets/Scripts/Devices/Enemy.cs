@@ -53,6 +53,7 @@ public class Enemy : Combatant
         isAlive = health > 0;
 
         if (GameManager.Instance.CurrentState() != GameState.PLAYING || !isAlive) return;
+
         base.Update();
         
         switch (powerState)

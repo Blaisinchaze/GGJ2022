@@ -23,6 +23,8 @@ public class Turret : Defence
     {
         base.Update();
 
+        if (GameManager.Instance.CurrentState() != GameState.PLAYING) return;
+
         switch (powerState)
         {
             case PowerState.DRAINED:

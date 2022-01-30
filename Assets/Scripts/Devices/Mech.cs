@@ -30,7 +30,7 @@ public class Mech : Defence
     internal override void Update()
     {
         base.Update();
-
+        if (GameManager.Instance.CurrentState() != GameState.PLAYING) return;
         switch (powerState)
         {
             case PowerState.DRAINED:

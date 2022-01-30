@@ -54,6 +54,8 @@ public class WaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.CurrentState() != GameState.PLAYING) return;
+
         if (waveTimer > 0)
         {
             waveTimer -= Time.deltaTime;

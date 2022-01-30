@@ -54,6 +54,18 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
 
+        if (GameManager.Instance.CurrentState() != GameState.PLAYING)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            return;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
         UpdateLookDirection();
         UpdateMovementDirection();
         CheckForJump();

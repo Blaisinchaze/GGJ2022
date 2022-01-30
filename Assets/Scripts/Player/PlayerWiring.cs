@@ -49,6 +49,8 @@ public class PlayerWiring : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.CurrentState() != GameState.PLAYING) return;
+
         InteractTarget();
         if (buzzNoise.isPlaying)
         {

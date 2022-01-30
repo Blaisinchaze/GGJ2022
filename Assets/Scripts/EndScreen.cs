@@ -22,5 +22,6 @@ public class EndScreen : MonoBehaviour
         end.SetActive(true);
         end.SetActive(true);
         text.text = GameManager.Instance.score.ToString();
+        GameManager.Instance.ChangeState(GameState.POST_GAME);
     }
 }
