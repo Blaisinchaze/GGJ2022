@@ -59,11 +59,21 @@ public class Mech : Defence
 
         if (target == null || Vector3.Distance(target.transform.position, transform.position) > range || !target.isAlive)
         {
+            target = null;
             EnemyDetection();
         }
         else
         {
             Attack();
+        }
+
+        if (target != null)
+        {
+            transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
+        }
+        else
+        {
+            transform.rotation = Quaternion.LookRotation(player.transform.position - transform.position);
         }
     }
 
