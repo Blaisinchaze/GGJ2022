@@ -33,6 +33,7 @@ public class PlayerWiring : MonoBehaviour
     public float drainTime;
 
     [SerializeField] AudioSource buzzNoise;
+    [SerializeField] Animator weaponAnimation;
 
     // Start is called before the first frame update
     void Start()
@@ -148,6 +149,7 @@ public class PlayerWiring : MonoBehaviour
         {
             buzzNoise.Stop();
         }
+        weaponAnimation.SetBool("Attacking", false);
     }
     /// <summary>
     /// Find a target and tether to it if not null
@@ -192,6 +194,7 @@ public class PlayerWiring : MonoBehaviour
 
             buzzNoise.Play();
         }
+        weaponAnimation.SetBool("Attacking", true);
     }
     /// <summary>
     /// Launch a spherecast forward, find the closest device to the origin and assign that as the new target.
