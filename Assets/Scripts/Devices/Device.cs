@@ -58,10 +58,6 @@ public class Device : MonoBehaviour
     // returns how much energy is being not being spent
     public float SpendEnergy(float cost)
     {
-        //float retVal = cost;
-
-        if (currentEnergy - cost < 0)
-            return 0;
         if (drainProtection)
             return 0;
 
@@ -69,14 +65,13 @@ public class Device : MonoBehaviour
 
         if (currentEnergy - cost < 0)
         {
-            retVal = Mathf.Abs(currentEnergy - cost);
+            retVal =  currentEnergy;
         }
-
         currentEnergy -= cost;
+
         currentEnergy = Mathf.Clamp(currentEnergy, 0, maxEnergy);
 
-        //return retVal;
-        return cost;
+        return retVal;
     }
 
     /// <summary>
