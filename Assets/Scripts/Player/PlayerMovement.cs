@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject Body;
     [SerializeField] private Transform Head;
     [SerializeField] private Transform cameraTransform;
+    [SerializeField] private Animator animator;
     
     // =====    Camera Stuff
     
@@ -63,7 +64,12 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if (movementDirection != Vector3.zero)
+        {
             ExecuteMovement();
+            animator.SetBool("Moving", true);
+        }
+        else { animator.SetBool("Moving", false); }
+
         cameraTransform.position = Head.position;
     }
 
