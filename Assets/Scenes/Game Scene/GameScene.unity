@@ -2184,6 +2184,10 @@ PrefabInstance:
       propertyPath: tether
       value: 
       objectReference: {fileID: 110350486}
+    - target: {fileID: 1322723381, guid: 94ef6484b6bbc0c49ba894eb76527cd9, type: 3}
+      propertyPath: drainTime
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4922139547572719228, guid: 94ef6484b6bbc0c49ba894eb76527cd9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.06
@@ -2239,7 +2243,7 @@ PrefabInstance:
     - target: {fileID: 4922139547572719231, guid: 94ef6484b6bbc0c49ba894eb76527cd9, type: 3}
       propertyPath: animator
       value: 
-      objectReference: {fileID: 1106648909}
+      objectReference: {fileID: 1106648911}
     - target: {fileID: 6160842223108141442, guid: 94ef6484b6bbc0c49ba894eb76527cd9, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -20371,7 +20375,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1270873721, guid: 94ef6484b6bbc0c49ba894eb76527cd9, type: 3}
   m_PrefabInstance: {fileID: 110350485}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1106648909
+--- !u!95 &1106648911
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
