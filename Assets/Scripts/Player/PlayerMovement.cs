@@ -63,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.Instance.CurrentState() != GameState.PLAYING) return;
+
         if (movementDirection != Vector3.zero)
         {
             ExecuteMovement();

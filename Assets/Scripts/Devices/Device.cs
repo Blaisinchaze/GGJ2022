@@ -33,7 +33,7 @@ public class Device : MonoBehaviour
     internal virtual void Update()
     {
         StateUpdate();
-
+        if (GameManager.Instance.CurrentState() != GameState.PLAYING) return;
         if (powerState == PowerState.POWERED)
         {
             SpendEnergy(energyLossPerSecond * Time.deltaTime);
