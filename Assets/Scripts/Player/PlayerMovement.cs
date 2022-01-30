@@ -78,8 +78,8 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private void DoJump()
     {
-        if (!groundCheck.GetIsGrounded()) return;
-        Rb.velocity = new Vector3(Rb.velocity.x, jumpHeight, Rb.velocity.z);  
+        //if (!groundCheck.GetIsGrounded()) return;
+        //Rb.velocity = new Vector3(Rb.velocity.x, jumpHeight, Rb.velocity.z);  
     }
     
     /// <summary>
