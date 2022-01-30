@@ -86,8 +86,6 @@ public class Enemy : Combatant
         gameObject.layer = 1 << 0;
         GetComponent<Collider>().enabled = false;
         WaveManager.Instance.RemoveEnemy(this);
-        //Destroy(this);
-        //Destroy(gameObject, 1);
     }
 
     public override void GetHit(int dmg)
