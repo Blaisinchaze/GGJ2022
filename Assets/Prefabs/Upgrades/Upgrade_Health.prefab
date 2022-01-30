@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1a68239df5f8f4da9baf10cee126f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthUpgrade: 10
+  healthUpgrade: 25
   speedUpgrade: 0
   drainUpgrade: 0
   batteryUpgrade: 0

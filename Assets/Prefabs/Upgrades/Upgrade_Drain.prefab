@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthUpgrade: 0
   speedUpgrade: 0
-  drainUpgrade: 5
+  drainUpgrade: 10
   batteryUpgrade: 0
 --- !u!136 &-5678172670059695563
 CapsuleCollider:
