@@ -7,6 +7,11 @@ public class Projectile : MonoBehaviour
     public int dmg;
     public GameObject parent;
 
+    public void Start()
+    {
+        Destroy(gameObject, 15);
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         Enemy enemy;

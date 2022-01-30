@@ -10,8 +10,8 @@ public class Mech : Defence
     public float moveSpeed;
     [Space]
     public float minDistanceFromPlayer;
-    //public float maxAggroRange;
     [Space]
+    public float bulletSpeed = 100;
     public GameObject bulletPrefab;
 
     NavMeshAgent agent;
@@ -73,12 +73,12 @@ public class Mech : Defence
         {
             //target.GetComponent<Combatant>().GetHit(strength);
             attackTimer = attackDelay;
-            offset = (target.transform.position - transform.position).normalized;
+            offset = (target.transform.position - transform.position).normalized * 0.5f;
             GameObject projectile = Instantiate(bulletPrefab, transform.position + offset, Quaternion.identity);
             Projectile proj = projectile.GetComponent<Projectile>();
             proj.dmg = strength;
             proj.parent = gameObject;
-            projectile.GetComponent<Rigidbody>().AddForce(offset * 50);
+            projectile.GetComponent<Rigidbody>().AddForce(offset * bulletSpeed);
         }
         else
         {
