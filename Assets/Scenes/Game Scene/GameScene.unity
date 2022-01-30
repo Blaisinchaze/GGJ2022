@@ -1624,7 +1624,8 @@ MonoBehaviour:
   speed: 0.25
   isOpen: 0
   spawnPoints:
-  - {fileID: 0}
+  - {fileID: 1244237898}
+  - {fileID: 1470045797}
 --- !u!23 &59814302
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13518,8 +13519,8 @@ Transform:
   - {fileID: 1446592939}
   - {fileID: 315274383}
   - {fileID: 438624990}
-  - {fileID: 2008829122}
   - {fileID: 1109212517}
+  - {fileID: 2008829122}
   - {fileID: 1781841933}
   - {fileID: 1244237898}
   - {fileID: 1470045797}
@@ -16637,7 +16638,8 @@ MonoBehaviour:
   speed: 0.25
   isOpen: 0
   spawnPoints:
-  - {fileID: 0}
+  - {fileID: 1607531301}
+  - {fileID: 1921469090}
 --- !u!23 &928518492
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -19686,7 +19688,9 @@ MonoBehaviour:
   speed: 0.25
   isOpen: 0
   spawnPoints:
-  - {fileID: 0}
+  - {fileID: 1109212517}
+  - {fileID: 2008829122}
+  - {fileID: 1781841933}
 --- !u!23 &1059167185
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20362,7 +20366,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 761969114}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1109212518
 SphereCollider:
@@ -25923,7 +25927,8 @@ MonoBehaviour:
   speed: 0.25
   isOpen: 0
   spawnPoints:
-  - {fileID: 0}
+  - {fileID: 1244237898}
+  - {fileID: 1470045797}
 --- !u!23 &1358125460
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -39657,7 +39662,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 761969114}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &2008829123
 SphereCollider:
@@ -43590,6 +43595,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -127.157
       objectReference: {fileID: 0}
+    - target: {fileID: 3534468992601110729, guid: c682f0ebcf3e9ff478b0776b9f5964c8, type: 3}
+      propertyPath: spawnPoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3534468992601110729, guid: c682f0ebcf3e9ff478b0776b9f5964c8, type: 3}
+      propertyPath: spawnPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1648216601}
+    - target: {fileID: 3534468992601110729, guid: c682f0ebcf3e9ff478b0776b9f5964c8, type: 3}
+      propertyPath: spawnPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1904473774}
     - target: {fileID: 3534468992601110730, guid: c682f0ebcf3e9ff478b0776b9f5964c8, type: 3}
       propertyPath: m_Name
       value: Door
