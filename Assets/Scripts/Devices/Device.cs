@@ -90,15 +90,15 @@ public class Device : MonoBehaviour
         powerState = currentEnergy >= minActiveEnergy ? PowerState.POWERED : PowerState.DRAINED;
     }
 
-    public IEnumerator StealEnergyOverTime(Device victim, float TimeFromMax)
+    public IEnumerator StealEnergyOverTime(Device victim, float speed)
     {
-        StealEnergy(victim, victim.maxEnergy / TimeFromMax * Time.deltaTime);
+        StealEnergy(victim, speed * Time.deltaTime);
         yield return 0;
     }
     
-    public IEnumerator SendEnergyOverTime(Device receiver, float TimeFromMax)
+    public IEnumerator SendEnergyOverTime(Device receiver, float speed)
     {
-        receiver.StealEnergy(this, maxEnergy / TimeFromMax * Time.deltaTime);
+        receiver.StealEnergy(this, speed * Time.deltaTime);
         yield return 0;
     }
 }
