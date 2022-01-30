@@ -9,18 +9,6 @@ public class Upgrade : MonoBehaviour
     public float drainUpgrade;
     public float batteryUpgrade;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -33,6 +21,8 @@ public class Upgrade : MonoBehaviour
             wr.drainTime += drainUpgrade;
             PlayerMovement mv = other.GetComponent<PlayerMovement>();
             mv.moveSpeed += speedUpgrade;
+
+            Destroy(gameObject);
         }
     }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3057603994709276952}
   - component: {fileID: 7669752262812331551}
   - component: {fileID: 6398084422698390298}
+  - component: {fileID: 5195422545152371952}
   m_Layer: 0
   m_Name: Upgrade_Speed
   m_TagString: Untagged
@@ -26,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1096835985813815282}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -31.27328, y: -7.1921053, z: 28.504406}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -72,15 +73,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 443dae4b62b95914a92c923bdc9f530a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 10, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &6398084422698390298
@@ -95,7 +96,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1a68239df5f8f4da9baf10cee126f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthUpgrade: 5
+  healthUpgrade: 0
   speedUpgrade: 5
-  drainUpgrade: 2
-  batteryUpgrade: 10
+  drainUpgrade: 0
+  batteryUpgrade: 0
+--- !u!136 &5195422545152371952
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096835985813815282}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 5
+  m_Height: 10
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
