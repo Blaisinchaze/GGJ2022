@@ -12,7 +12,7 @@ public class WaveManager : MonoBehaviour
     }
     #endregion
 
-    int waveNum = 0;
+    public int waveNum = 0;
     public GameObject prefab;
     [Space]
     public int enemiesAddedPerWave;
@@ -24,7 +24,7 @@ public class WaveManager : MonoBehaviour
     private List<Transform> activeSpawners = new List<Transform>();
 
 
-    private List<GameObject> enemies = new List<GameObject>();
+    private List<Enemy> enemies = new List<Enemy>();
     [SerializeField]
     private float waveTimer;
     private List<int> indexHistory = new List<int>();
@@ -61,6 +61,19 @@ public class WaveManager : MonoBehaviour
         {
             SpawnWave();
         }
+
+        if (waveTimer > minDuration && enemies.Count == 0)
+        {
+            waveTimer = minDuration;
+        }
+
+        foreach (Enemy item in enemies)
+        {
+            if (!item.agentActive && item.isAlive)
+            {
+                item.agentActive = true;
+            }
+        }
     }
 
     public void SpawnWave()
@@ -85,7 +98,7 @@ public class WaveManager : MonoBehaviour
 
             newEnemy.transform.position = activeSpawners[index].position;
 
-            enemies.Add(newEnemy);
+            enemies.Add(newEnemy.GetComponent<Enemy>());
             waveTimer += durationAddedPerEnemy;
         }
 
@@ -102,5 +115,10 @@ public class WaveManager : MonoBehaviour
                 activeSpawners.Add(spawnPoint);
             }
         }
+    }
+
+    public void RemoveEnemy(Enemy enemy) 
+    {
+        enemies.Remove(enemy);
     }
 }

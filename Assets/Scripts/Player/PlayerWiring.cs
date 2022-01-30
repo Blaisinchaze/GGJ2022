@@ -103,6 +103,7 @@ public class PlayerWiring : MonoBehaviour
 
     private void CheckEnemyDead(Enemy enemy)
     {
+        if (!targetAttached) return;
         if (target.GetComponent<Enemy>() == enemy)
             target = null;
     }
@@ -216,5 +217,10 @@ public class PlayerWiring : MonoBehaviour
         tetherPoint = hit.point;
         tetherNormal = hit.normal;
         return targetDevice;
+    }
+
+    public Device getCurrentConnectedDevice()
+    {
+        return target;
     }
 }

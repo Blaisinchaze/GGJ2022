@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
 
     public void AddScoreFromEnemyKill(Enemy enemy)
     {
-        score += enemy.scoreValue;
+        score += (int)(enemy.scoreValue * Mathf.Clamp(enemy.currentEnergy, 1, enemy.maxEnergy/2));
     }
 
     public GameState CurrentState()

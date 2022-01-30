@@ -10,7 +10,7 @@ public class Defence : Device
     public float hitStunDuration;
     public float range;
     [Space]
-    public GameObject target;
+    public Combatant target;
 
     internal float attackTimer;
     private float width = 0.1f;
@@ -54,7 +54,7 @@ public class Defence : Device
 
         List<Collider> hits = new List<Collider>(Physics.OverlapSphere(transform.position, range, deviceMask));
 
-        GameObject closest = target;
+        Combatant closest = target;
 
         foreach (Collider hit in hits)
         {
@@ -68,7 +68,7 @@ public class Defence : Device
                     if (!Physics.Raycast(ray, out rh, Vector3.Distance(transform.position, hit.transform.position), ~deviceMask))
                     {
                         Debug.DrawLine(transform.position, hit.transform.position - transform.position, Color.blue, 0.1f);
-                        closest = hit.gameObject;
+                        closest = hit.gameObject.GetComponent<Combatant>();
                     }
                 }
             }

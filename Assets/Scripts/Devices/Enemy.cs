@@ -16,6 +16,12 @@ public class Enemy : Combatant
     public float moveSpeed;
     [Space]
     public int scoreValue;
+    [Space]
+    public Material deadMat;
+
+    internal bool agentActive = false;
+
+    private Renderer rend;
 
     private float overchargeTimer = 0;
     private float attackTimer;
@@ -34,13 +40,17 @@ public class Enemy : Combatant
         agent = GetComponent<NavMeshAgent>();
         faceHandler = GetComponentInChildren<EnemyFaceUpdate>();
         agent.updateRotation = false;
+        agent.enabled = agentActive;
+        rend = GetComponent<Renderer>();
     }
 
     override internal void Update()
     {
+        agent.enabled = agentActive;
         transform.rotation = Quaternion.LookRotation(playerT.position - transform.position);
+        isAlive = health > 0;
 
-        if (GameManager.Instance.CurrentState() != GameState.PLAYING) return;
+        if (GameManager.Instance.CurrentState() != GameState.PLAYING || !isAlive) return;
         base.Update();
         
         switch (powerState)
@@ -61,12 +71,20 @@ public class Enemy : Combatant
 
         drainProtection = powerState != PowerState.POWERED || overchargeTimer > 0;
         attackTimer -= Time.deltaTime;
+
     }
 
     public override void Die()
     {
+        isAlive = false;
         GameManager.Instance.m_EnemyKilled.Invoke(this);
-        Destroy(gameObject);
+        rend.material = deadMat;
+        faceHandler.gameObject.SetActive(false);
+        gameObject.layer = 1 << 0;
+        GetComponent<Collider>().enabled = false;
+        WaveManager.Instance.RemoveEnemy(this);
+        //Destroy(this);
+        //Destroy(gameObject, 1);
     }
 
     public override void GetHit(int dmg)
