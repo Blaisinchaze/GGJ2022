@@ -43601,6 +43601,14 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 904182277}
+    - target: {fileID: 982697732665389469, guid: 09705b93b9e54b441bbab58a85719309, type: 3}
+      propertyPath: sceneName
+      value: Start Screen
+      objectReference: {fileID: 0}
+    - target: {fileID: 1918136236578307443, guid: 09705b93b9e54b441bbab58a85719309, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09705b93b9e54b441bbab58a85719309, type: 3}
 --- !u!23 &216729765780595821
