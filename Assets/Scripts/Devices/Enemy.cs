@@ -82,6 +82,7 @@ public class Enemy : Combatant
         faceHandler.gameObject.SetActive(false);
         gameObject.layer = 1 << 0;
         GetComponent<Collider>().enabled = false;
+        WaveManager.Instance.RemoveEnemy(this);
         //Destroy(this);
         //Destroy(gameObject, 1);
     }

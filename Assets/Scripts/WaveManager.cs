@@ -62,6 +62,11 @@ public class WaveManager : MonoBehaviour
             SpawnWave();
         }
 
+        if (waveTimer > minDuration && enemies.Count == 0)
+        {
+            waveTimer = minDuration;
+        }
+
         foreach (Enemy item in enemies)
         {
             if (!item.agentActive && item.isAlive)
@@ -110,5 +115,10 @@ public class WaveManager : MonoBehaviour
                 activeSpawners.Add(spawnPoint);
             }
         }
+    }
+
+    public void RemoveEnemy(Enemy enemy) 
+    {
+        enemies.Remove(enemy);
     }
 }
