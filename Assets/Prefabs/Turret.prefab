@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 6266911685753474639}
   - component: {fileID: 6266911685753474636}
   - component: {fileID: 8410889461539347420}
+  - component: {fileID: 950862082}
   m_Layer: 10
   m_Name: Turret
   m_TagString: Untagged
@@ -191,7 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxEnergy: 20
-  energyLossPerSecond: -5
+  energyLossPerSecond: 1
   minActiveEnergy: 5
   currentEnergy: 0
   strength: 1
@@ -201,3 +202,19 @@ MonoBehaviour:
   target: {fileID: 0}
   bulletSpeed: 300
   bulletPrefab: {fileID: 1720609349537398333, guid: 3685b706b8da3264986c25ed6733cbf3, type: 3}
+--- !u!208 &950862082
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6266911685753474637}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.75, y: 0.5, z: 0.75}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
