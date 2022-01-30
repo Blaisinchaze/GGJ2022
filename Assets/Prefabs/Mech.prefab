@@ -761,7 +761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxEnergy: 300
-  energyLossPerSecond: -10
+  energyLossPerSecond: 10
   minActiveEnergy: 30
   currentEnergy: 0
   strength: 2

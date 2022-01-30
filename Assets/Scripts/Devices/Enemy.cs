@@ -18,6 +18,9 @@ public class Enemy : Combatant
     public int scoreValue;
     [Space]
     public Material deadMat;
+
+    internal bool agentActive = false;
+
     private Renderer rend;
 
     private float overchargeTimer = 0;
@@ -37,11 +40,13 @@ public class Enemy : Combatant
         agent = GetComponent<NavMeshAgent>();
         faceHandler = GetComponentInChildren<EnemyFaceUpdate>();
         agent.updateRotation = false;
+        agent.enabled = agentActive;
         rend = GetComponent<Renderer>();
     }
 
     override internal void Update()
     {
+        agent.enabled = agentActive;
         transform.rotation = Quaternion.LookRotation(playerT.position - transform.position);
         isAlive = health > 0;
 

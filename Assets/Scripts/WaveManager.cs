@@ -24,7 +24,7 @@ public class WaveManager : MonoBehaviour
     private List<Transform> activeSpawners = new List<Transform>();
 
 
-    private List<GameObject> enemies = new List<GameObject>();
+    private List<Enemy> enemies = new List<Enemy>();
     [SerializeField]
     private float waveTimer;
     private List<int> indexHistory = new List<int>();
@@ -61,6 +61,14 @@ public class WaveManager : MonoBehaviour
         {
             SpawnWave();
         }
+
+        foreach (Enemy item in enemies)
+        {
+            if (!item.agentActive && item.isAlive)
+            {
+                item.agentActive = true;
+            }
+        }
     }
 
     public void SpawnWave()
@@ -85,7 +93,7 @@ public class WaveManager : MonoBehaviour
 
             newEnemy.transform.position = activeSpawners[index].position;
 
-            enemies.Add(newEnemy);
+            enemies.Add(newEnemy.GetComponent<Enemy>());
             waveTimer += durationAddedPerEnemy;
         }
 
