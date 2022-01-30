@@ -71,7 +71,7 @@ public class Combatant : Device
    public virtual void Die()
    {
         isAlive = false;
-        if (gameObject.tag == "Player") GameManager.Instance.m_PlayerKilled.Invoke();
+        if (gameObject.tag != "Enemy") GameManager.Instance.m_PlayerKilled.Invoke();
         else
         {
             Destroy(gameObject);

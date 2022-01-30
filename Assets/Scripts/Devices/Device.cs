@@ -63,7 +63,7 @@ public class Device : MonoBehaviour
         if (currentEnergy - cost < 0)
             return 0;
         if (drainProtection)
-            return cost;
+            return 0;
 
         float retVal = cost;
 
