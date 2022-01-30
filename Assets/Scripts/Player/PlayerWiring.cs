@@ -77,10 +77,14 @@ public class PlayerWiring : MonoBehaviour
         {
             StartCoroutine(playerDevice.StealEnergyOverTime(target, drainTime));
             tetherScript.currentTetherState = Tether.tetherAction.Taking;
+            if (target.currentEnergy <= 1 && target.powerState == PowerState.DRAINED
+                && tetherScript.currentTetherState == Tether.tetherAction.Taking) target = null;
         }
         else if (inputManager.LeftMouseHeld)
         {
             StartCoroutine(playerDevice.SendEnergyOverTime(target, drainTime));
+            if (target.currentEnergy >= target.maxEnergy
+                && tetherScript.currentTetherState == Tether.tetherAction.Sending) target = null;
             tetherScript.currentTetherState = Tether.tetherAction.Sending;
         }
 
