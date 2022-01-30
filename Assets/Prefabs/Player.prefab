@@ -813,7 +813,7 @@ MonoBehaviour:
   lineObject: {fileID: 3469578154710363197}
   jointB: {fileID: 6127847964356733630}
   jointA: {fileID: 6127847964174386210}
-  tether: {fileID: 6127847964174386210}
+  tether: {fileID: 9121529267294250288}
   playerHands: {fileID: 513108328}
 --- !u!1 &4922139547684779182
 GameObject:
