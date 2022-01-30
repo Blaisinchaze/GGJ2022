@@ -13,13 +13,13 @@ public class Upgrade : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Combatant cb = other.GetComponent<Combatant>();
+            Combatant cb = other.GetComponentInParent<Combatant>();
             cb.health += healthUpgrade;
             cb.maxHealth += healthUpgrade;
             cb.maxEnergy += batteryUpgrade;
-            PlayerWiring wr = other.GetComponent<PlayerWiring>();
+            PlayerWiring wr = other.GetComponentInParent<PlayerWiring>();
             wr.drainTime += drainUpgrade;
-            PlayerMovement mv = other.GetComponent<PlayerMovement>();
+            PlayerMovement mv = other.GetComponentInParent<PlayerMovement>();
             mv.moveSpeed += speedUpgrade;
 
             Destroy(gameObject);
