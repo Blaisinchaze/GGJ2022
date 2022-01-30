@@ -40,6 +40,8 @@ public class PlayerWiring : MonoBehaviour
         OnTetherAttach += tetherScript.OnTetherAttach;
         OnTetherDetach += tetherScript.OnTetherDetach;
         OnTetherDetach += ResetTether;
+        GameManager.Instance.m_EnemyKilled.AddListener(CheckEnemyDead);
+
     }
 
     // Update is called once per frame
@@ -54,13 +56,26 @@ public class PlayerWiring : MonoBehaviour
         AttachTether();
 
         if (inputManager.RightMouseHeld)
-            StartCoroutine(playerDevice.StealEnergyOverTime(target, 5f));
+        {
+            StartCoroutine(playerDevice.StealEnergyOverTime(target, drainTime));
+            tetherScript.currentTetherState = Tether.tetherAction.Taking;
+        }
         else if (inputManager.LeftMouseHeld)
-            StartCoroutine(playerDevice.SendEnergyOverTime(target, 5f));
-        if (!inputManager.RightMouseHeld)
-            StopCoroutine(playerDevice.StealEnergyOverTime(target, 5f));
-        else if (!inputManager.LeftMouseHeld)  
-            StopCoroutine(playerDevice.SendEnergyOverTime(target, 5f));
+        {
+            StartCoroutine(playerDevice.SendEnergyOverTime(target, drainTime));
+            tetherScript.currentTetherState = Tether.tetherAction.Sending;
+        }
+
+        if (!inputManager.RightMouseHeld && tetherScript.currentTetherState == Tether.tetherAction.Taking)
+        {
+            StopCoroutine(playerDevice.StealEnergyOverTime(target, drainTime));
+            target = null;
+        }
+        else if (!inputManager.LeftMouseHeld && tetherScript.currentTetherState == Tether.tetherAction.Sending)
+        {
+            StopCoroutine(playerDevice.SendEnergyOverTime(target, drainTime));
+            target = null;
+        }
     }
 
     private bool DetachFromDistance()
@@ -86,6 +101,14 @@ public class PlayerWiring : MonoBehaviour
         return true;
     }
 
+    private void CheckEnemyDead(Enemy enemy)
+    {
+        if (target.GetComponent<Enemy>() == enemy)
+            target = null;
+    }
+    /// <summary>
+    /// Clear all the tether values once detached
+    /// </summary>
     private void ResetTether()
     {
         tether.transform.parent = null;
@@ -97,6 +120,9 @@ public class PlayerWiring : MonoBehaviour
         storedRot = cameraTransform.localRotation;
         target = null;
     }
+    /// <summary>
+    /// Find a target and tether to it if not null
+    /// </summary>
     private void GetNewTarget()
     {
         if (target != null) return;
@@ -108,6 +134,9 @@ public class PlayerWiring : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// If not attached, enable the tether. Otherwise, update tether location every update
+    /// </summary>
     private void AttachTether()
     {
         if (!tether.activeSelf)
@@ -127,6 +156,8 @@ public class PlayerWiring : MonoBehaviour
         tether.transform.rotation = Quaternion.FromToRotation(transform.up, tetherNormal);
         tether.transform.parent = target.transform;
         tether.transform.localScale = new Vector3(0.15f,0.15f,0.15f);
+        tetherScript.playerLocation = firePoint.position;
+        tetherScript.tetherLocation = tether.transform.position;
 
     }
     /// <summary>
