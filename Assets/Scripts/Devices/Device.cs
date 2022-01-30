@@ -33,7 +33,11 @@ public class Device : MonoBehaviour
     internal virtual void Update()
     {
         StateUpdate();
-        SpendEnergy(energyLossPerSecond * Time.deltaTime);
+
+        if (powerState == PowerState.POWERED)
+        {
+            SpendEnergy(energyLossPerSecond * Time.deltaTime);
+        }
     }
 
     // returns how much over the maxEnergy / how much energy not used
