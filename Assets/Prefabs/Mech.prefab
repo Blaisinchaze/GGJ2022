@@ -772,7 +772,7 @@ MonoBehaviour:
   target: {fileID: 0}
   moveSpeed: 2
   minDistanceFromPlayer: 3
-  bulletSpeed: 300
+  bulletSpeed: 500
   bulletPrefab: {fileID: 1720609349537398333, guid: 3685b706b8da3264986c25ed6733cbf3, type: 3}
   shootSound: {fileID: 7369616933016959858}
 --- !u!195 &6266911685753474632
