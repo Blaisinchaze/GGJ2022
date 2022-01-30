@@ -16,6 +16,9 @@ public class Enemy : Combatant
     public float moveSpeed;
     [Space]
     public int scoreValue;
+    [Space]
+    public Material deadMat;
+    private Renderer rend;
 
     private float overchargeTimer = 0;
     private float attackTimer;
@@ -34,6 +37,7 @@ public class Enemy : Combatant
         agent = GetComponent<NavMeshAgent>();
         faceHandler = GetComponentInChildren<EnemyFaceUpdate>();
         agent.updateRotation = false;
+        rend = GetComponent<Renderer>();
     }
 
     override internal void Update()
@@ -65,8 +69,11 @@ public class Enemy : Combatant
 
     public override void Die()
     {
+        isAlive = false;
         GameManager.Instance.m_EnemyKilled.Invoke(this);
-        Destroy(gameObject);
+        rend.material = deadMat;
+
+        Destroy(gameObject, 5);
     }
 
     public override void GetHit(int dmg)
