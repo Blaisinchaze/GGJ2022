@@ -31,6 +31,8 @@ public class Enemy : Combatant
     Transform playerT;
     EnemyFaceUpdate faceHandler;
 
+    [SerializeField] AudioSource attackSound;
+
     override internal void Start()
     {
         base.Start();
@@ -165,6 +167,7 @@ public class Enemy : Combatant
     public void Attack()
     {
         player.GetHit(outDmg);
+        attackSound.Play();
     }
 
     private void StandStill()
