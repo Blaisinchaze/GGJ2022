@@ -79,8 +79,9 @@ public class Enemy : Combatant
 
     public override void Die()
     {
-        isAlive = false;
         GameManager.Instance.m_EnemyKilled.Invoke(this);
+        StandStill();
+        isAlive = false;
         rend.material = deadMat;
         faceHandler.gameObject.SetActive(false);
         gameObject.layer = 1 << 0;
