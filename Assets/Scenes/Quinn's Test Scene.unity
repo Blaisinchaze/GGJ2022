@@ -1094,6 +1094,14 @@ PrefabInstance:
       propertyPath: activeSpawners.Array.data[1]
       value: 
       objectReference: {fileID: 330018445}
+    - target: {fileID: 4250174940715947499, guid: 03c71466f22ce3c44b079b2357ecc394, type: 3}
+      propertyPath: minDuration
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4250174940715947499, guid: 03c71466f22ce3c44b079b2357ecc394, type: 3}
+      propertyPath: maxDuration
+      value: 300
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03c71466f22ce3c44b079b2357ecc394, type: 3}
 --- !u!1001 &4677979556043463418
