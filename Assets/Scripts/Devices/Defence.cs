@@ -24,6 +24,7 @@ public class Defence : Device
     internal override void Update()
     {
         base.Update();
+        if (target != null && target.health == 0) target = null;
         if (powerState == PowerState.DRAINED) return;
     }
 
