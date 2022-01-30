@@ -42,6 +42,7 @@ public class UIController : MonoBehaviour
         }
         else
         {
+            deviceName.text = "No Connected Device";
             devicePower.text = "No Connected Device";
         }
     }

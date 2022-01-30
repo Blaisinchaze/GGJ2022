@@ -9,6 +9,12 @@ public class Upgrade : MonoBehaviour
     public float drainUpgrade;
     public float batteryUpgrade;
 
+    private void Update()
+    {
+
+        transform.Rotate(Vector3.up, 5.0f);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")

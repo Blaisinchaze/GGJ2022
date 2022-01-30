@@ -40,7 +40,7 @@ public class Turret : Defence
     private void PoweredUpdate()
     {
 
-        if (target == null || Vector3.Distance(target.transform.position, transform.position) > range)
+        if (target == null || Vector3.Distance(target.transform.position, transform.position) > range || !target.isAlive)
         {
             EnemyDetection();
         }
