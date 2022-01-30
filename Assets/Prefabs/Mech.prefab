@@ -761,13 +761,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxEnergy: 300
-  energyLossPerSecond: 10
+  energyLossPerSecond: 5
   minActiveEnergy: 30
   currentEnergy: 0
   strength: 2
   attackDelay: 0.5
   hitStunDuration: 0.15
-  range: 5
+  range: 4
   target: {fileID: 0}
   moveSpeed: 2
   minDistanceFromPlayer: 3

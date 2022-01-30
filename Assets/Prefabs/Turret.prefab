@@ -663,13 +663,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxEnergy: 50
-  energyLossPerSecond: 5
+  energyLossPerSecond: 2
   minActiveEnergy: 10
   currentEnergy: 0
   strength: 1
   attackDelay: 0.5
   hitStunDuration: 0
-  range: 3
+  range: 4
   target: {fileID: 0}
   bulletSpeed: 300
   bulletPrefab: {fileID: 1720609349537398333, guid: 3685b706b8da3264986c25ed6733cbf3, type: 3}
