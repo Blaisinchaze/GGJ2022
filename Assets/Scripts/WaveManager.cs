@@ -53,18 +53,18 @@ public class WaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (waveTimer > 0)
-        {
-            waveTimer -= Time.deltaTime;
-        }
-        else
+        //if (waveTimer > 0)
+        //{
+        //    waveTimer -= Time.deltaTime;
+        //}
+        //else
+        //{
+        //    SpawnWave();
+        //}
+
+        if (enemies.Count == 0)
         {
             SpawnWave();
-        }
-
-        if (waveTimer > minDuration && enemies.Count == 0)
-        {
-            waveTimer = minDuration;
         }
 
         foreach (Enemy item in enemies)
