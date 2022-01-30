@@ -758,7 +758,7 @@ MonoBehaviour:
   maxEnergy: 150
   energyLossPerSecond: 0
   minActiveEnergy: 0
-  currentEnergy: 0
+  currentEnergy: 150
   isAlive: 1
   health: 10
   maxHealth: 10
@@ -804,6 +804,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputs: {fileID: 0}
+  camera: {fileID: 2046217463}
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &1054157027
 MonoBehaviour:
   m_ObjectHideFlags: 0
