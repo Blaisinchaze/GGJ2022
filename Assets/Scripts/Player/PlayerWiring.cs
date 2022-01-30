@@ -117,6 +117,7 @@ public class PlayerWiring : MonoBehaviour
             OnTetherAttach?.Invoke();
         }
 
+        //  Update tether location
         //tether.transform.LookAt(Head.transform.position);
         var direction = new Vector3(tether.transform.position.x - cameraTransform.position.x,
             tether.transform.position.y - cameraTransform.position.y,
@@ -125,6 +126,8 @@ public class PlayerWiring : MonoBehaviour
 
         tether.transform.rotation = Quaternion.FromToRotation(transform.up, tetherNormal);
         tether.transform.parent = target.transform;
+        tether.transform.localScale = new Vector3(0.15f,0.15f,0.15f);
+
     }
     /// <summary>
     /// Launch a spherecast forward, find the closest device to the origin and assign that as the new target.
